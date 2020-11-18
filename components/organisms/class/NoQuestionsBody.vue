@@ -1,6 +1,6 @@
 <template>
   <div class="text-center text-main">
-    <div class="greetings my-5 pt-2">
+    <div class="greetings my-5 pt-2 animate__animated animate__backInDown">
       Olá Antonio
     </div>
     <div class="text-center text-main">

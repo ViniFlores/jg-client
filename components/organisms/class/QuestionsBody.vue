@@ -1,22 +1,39 @@
 <template>
   <div class="d-flex flex-column flex-grow-1 align-self-stretch align-center pt-2">
-    <div :class="'animate__fadeInDownBig greetings all_transitions ' + (!selected ? 'greetings-show my-5' : 'greetings-hidden')">
-      Olá Antonio
-    </div>
-    <div class="d-flex flex-column flex-grow-transition align-self-stretch ">
-      <core-button 
-        class="mb-5 flex-grow-transition"
-        text="Números Ímpares"
-        :trigger="selectQuestion"
-      />
-      <core-button
-        v-if="!selected"
-        class="mb-5 flex-grow-transition"
-        text="Números Pares"
-      />
-    </div>
 
-    <div v-if="selected" class="d-flex flex-column answer-sheet align-self-center pa-5 animate__animated animate__backInUp">
+    <transition
+      leave-active-class="animate__backOutUp absolute"
+    >
+      <div v-if="!selectedTopic" class="greetings animate__animated animate__backInDown">
+        Olá {{ user.firstname }}
+      </div>
+    </transition>
+
+    <transition
+      leave-active-class="animate__animated animate__backOutLeft absolute"
+    >
+      <div v-if="!selectedTopic" class="d-flex flex-column align-self-stretch mt-5">
+          <core-button 
+            v-for="topic in topics"
+            :key="'topic_' + topic.id"
+            class="mb-5 animate__animated animate__backInLeft"
+            :text="topic.title"
+            @click.native="selectTopic(topic)"
+          />  
+      </div>
+    </transition>
+
+    <transition
+      leave-active-class="animate__animated animate__backOutLeft"
+    >
+      <core-button 
+        v-if="selectedTopic"
+        class="mb-5 align-self-stretch animate__animated animate__backInLeft"
+        :text="selectedTopic.title"
+      />
+    </transition>
+
+    <div v-if="selectedTopic" class="d-flex flex-column answer-sheet align-self-center pa-5 animate__animated animate__backInUp">
       <div class="question-title mb-5">
         Qual desses números é par?
       </div>
@@ -32,14 +49,20 @@
 
     <v-spacer />
 
-    <div v-if="!selected" class="d-flex text-main text-center attention-message">
-      Preste atenção no professor.
-    </div>
+    <transition
+      leave-active-class="animate__backOutDown"
+    >
+      <div v-if="!selectedTopic" class="d-flex text-main text-center attention-message animate__animated animate__backInLeft">
+        Preste atenção no professor.
+      </div>
+    
+    </transition>
 
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CoreButton from '~/components/atoms/CoreButton.vue'
 
 export default {
@@ -49,14 +72,22 @@ export default {
 
   data: function() {
     return {
-      selected: null,
+      selectedTopic: null,
     }
   },
 
+  computed: {
+    ...mapGetters({
+      user: 'auth/state',
+      topics: 'topic/all'
+    })
+  },
+
   methods: {
-    selectQuestion() {
-      this.selected = 1
-    }
+    selectTopic(topic) {
+      this.selectedTopic = topic
+      this.$store.commit('app/setNav', false)
+    },
   }
 }
 </script>
@@ -80,4 +111,7 @@ export default {
   width: calc(100vw - 24px)
   top: 25%
   background-color: white
+  
+.absolute
+  position: absolute
 </style>

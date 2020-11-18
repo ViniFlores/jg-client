@@ -11,28 +11,28 @@
       Insira seus dados para se cadastrar
     </div>
 
-    <form class="d-flex flex-column mt-5 flex-grow-1 align-self-stretch">
+    <v-form :disabled="loading" @submit.prevent="signup()" class="d-flex flex-column mt-5 flex-grow-1 align-self-stretch px-5">
       <div>
-        <v-text-field label="Nome" />
-        <v-text-field label="Sobrenome" />
-        <v-text-field label="Email" />
-        <v-text-field label="Senha" />
-        <v-text-field label="Confirmar senha" />
+        <v-text-field type="text" label="Nome" :rules="rules.firstname" v-model="user.firstname" />
+        <v-text-field type="text" label="Sobrenome" :rules="rules.lastname" v-model="user.lastname" />
+        <v-text-field type="text" label="Email" :rules="rules.email" v-model="user.email" />
+        <v-text-field type="password" label="Senha" :rules="rules.password" v-model="user.password" />
+        <v-text-field type="password" label="Confirmar senha" :rules="rules.confirmPassword" v-model="user.confirmPassword" />
 
         <div class="text-caption mt-2">
           Insira o id da sua sala
         </div>
-        <v-text-field label="Sala" />
+        <v-text-field type="text" label="Sala" :rules="rules.classId" v-model="user.classId" />
 
       </div>
 
       <v-spacer />
 
-      <v-btn class="secondary align-self-center" depressed>
+      <v-btn :loading="loading" class="secondary align-self-center" type="submit" depressed>
         Finalizar
       </v-btn>
 
-    </form>
+    </v-form>
 
   </div>
 </template>
@@ -40,6 +40,59 @@
 <script>
 export default {
   components: {
+  },
+
+  data: () => ({
+    loading: false,
+    user: {
+      firstname: null,
+      lastname: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+      classId: null
+    },
+
+    rules: {
+      firstname: [
+        value => !!value || 'Campo necessário',
+      ],
+      lastname: [
+        value => !!value || 'Campo necessário',
+      ],
+      email: [
+        value => !!value || 'Campo necessário',
+      ],
+      password: [
+        value => !!value || 'Campo necessário',
+      ],
+      confirmPassword: [
+        value => !!value || 'Campo necessário'
+      ],
+      classId: [
+        value => !!value || 'Campo necessário'
+      ]
+    }
+  }),
+
+
+  methods: {
+    signup() {
+      if (this.user.password != this.user.confirmPassword) this.$toast.error('Confirmação de senha mal sucedida.')
+
+      else {
+        this.loading = true
+        this.$axios.$post('http://localhost:3030/users/create', this.user).then(() => {
+          this.$router.push('/login')
+          this.$toast.info("Está sendo enviado um email para confirmação da conta")
+          this.loading = false
+        }).catch(e => {
+          this.$toast.error("Erro ao criar conta.")
+          this.loading = false
+        })
+      }
+
+    },
   }
 }
 </script>

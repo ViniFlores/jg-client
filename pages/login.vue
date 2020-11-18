@@ -13,21 +13,49 @@
         Bem vindo de volta !
       </div>
 
-      <form class="d-flex flex-grow-1 flex-column align-center" action="/">
+      <div class="d-flex flex-grow-1 flex-column align-center" method="POST" @submit.prevent="login">
         <div>
-          <v-text-field label="Email" />
-          <v-text-field label="Senha" />
+          <v-text-field type="text" label="Email" v-model="email" />
+          <v-text-field type="password" label="Senha" v-model="password" />
         </div>
         <v-spacer />
-        <v-btn depressed class="primary" type="submit">Login</v-btn>
-      </form>
+        <v-btn :loading="loading" depressed class="primary" @click="login()">Login</v-btn>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { io } from 'socket.io-client'
 export default {
   components: {
+  },
+
+  data: () => ({
+    email: '',
+    loading: false,
+    password: ''
+  }),
+
+  mounted() {
+    const socket = io ('http://localhost:3030')
+    socket.on('message', e => console.log(e))
+    socket.emit('auth', {jwt: this.$store.getters['auth/jwt']})
+  },
+
+  methods: {
+    login() {
+      console.log('POST: API_URL/users/login')
+      this.loading = true
+      this.$store.dispatch('auth/login', {email: this.email, password: this.password}, {withCredentials: true}).then(() => {
+        this.loading = false
+        this.$router.push('/')
+        this.$toast.success("Logado com sucesso!")
+      }).catch(e => {
+        this.loading = false
+        this.$toast.error("Erro ao se conectar.")
+      })
+    },
   }
 }
 </script>
@@ -56,4 +84,5 @@ export default {
   z-index: 500
   left: 12px
   top: 12px
+
 </style>

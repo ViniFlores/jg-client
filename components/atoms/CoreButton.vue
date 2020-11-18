@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="trigger()" large depressed class="d-flex flex-row button-shape justify-start">
+  <v-btn large depressed class="d-flex flex-row button-shape justify-start">
     <div class="button-circle primary mr-5" />
     <div class="button-text">
       {{text}}
@@ -14,10 +14,6 @@ export default {
       type: String,
       default: ''
     },
-    trigger: {
-      type: Function,
-      default: () => {}
-    }
   },
   components: {
   }
@@ -35,7 +31,7 @@ export default {
 
 .button-text
   font-weight: 600
-  font-size: 24px
+  font-size: 18px
   line-height: 29px
   color: #344356
 </style>

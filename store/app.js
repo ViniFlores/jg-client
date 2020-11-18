@@ -1,30 +1,18 @@
 export default {
   state: () => ({
-    id: null,
-    username: '',
-    email: '',
-    type: null
+    navBottom: true
   }),
 
   mutations: {
-    setUserData(state, data) {
-      state.id = data.user.id
-      state.username = data.user.username
-      state.email = data.user.email
-      state.type = data.user.type
+    setNav(state, newState) {
+      state.navBottom = newState
     }
   },
 
   getters: {
-    get_user: state => {
-      return {
-        id: state.id,
-        username: state.username,
-        email: state.email,
-        type: state.type
-      }
+    navBottom: state => {
+      return state.navBottom
     }
-
   },
 
   actions: {

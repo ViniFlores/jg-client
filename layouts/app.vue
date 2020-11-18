@@ -5,12 +5,13 @@
         <nuxt />
       </v-container>
     </v-main>
-    <bottom-nav />
+    <bottom-nav v-if="navBottom" />
   </v-app>
 </template>
 
 <script>
 import BottomNav from '~/components/molecules/BottomNav.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { 
@@ -19,6 +20,11 @@ export default {
   data () {
     return {
     }
+  },
+  computed: {
+    ...mapGetters({
+      navBottom: 'app/navBottom'
+    })
   }
 }
 </script>

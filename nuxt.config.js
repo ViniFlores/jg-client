@@ -28,7 +28,10 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '~/plugins/anime.js'
+    '~/plugins/anime.js',
+    '~/plugins/axios.js',
+    '~/plugins/toast.js',
+    '~/plugins/persistedState.client.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -47,7 +50,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    credentials: true
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
