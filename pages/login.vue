@@ -1,5 +1,5 @@
 <template>
-  <div class="d-md-none d-flex white flex-column full-viewport">
+  <div class="d-flex white flex-column full-viewport">
     <div class="d-flex align-center login-splash">
       <v-img src="3.jpg" alt="Login splash art" />
       <img class="logo" width="72px" src="logo-jg.svg" alt="Logo Jovens Genios" >
@@ -37,12 +37,6 @@ export default {
     password: ''
   }),
 
-  mounted() {
-    const socket = io ('http://localhost:3030')
-    socket.on('message', e => console.log(e))
-    socket.emit('auth', {jwt: this.$store.getters['auth/jwt']})
-  },
-
   methods: {
     login() {
       console.log('POST: API_URL/users/login')
@@ -50,7 +44,6 @@ export default {
       this.$store.dispatch('auth/login', {email: this.email, password: this.password}, {withCredentials: true}).then(() => {
         this.loading = false
         this.$router.push('/')
-        this.$toast.success("Logado com sucesso!")
       }).catch(e => {
         this.loading = false
         this.$toast.error("Erro ao se conectar.")

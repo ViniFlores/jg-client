@@ -9,8 +9,10 @@
 </template>
 
 <style lang="sass">
+html
+  font-family: "Montserrat"
 .app
-  padding: 0
+  padding: 0 !important
 .border-radius
   border-radius: 16px
 .full-viewport

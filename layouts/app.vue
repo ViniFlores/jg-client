@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <v-main class="app">
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-main>
     <bottom-nav v-if="navBottom" />
   </v-app>
@@ -32,6 +30,9 @@ export default {
 <style lang="sass">
 div
   z-index: 1
+
+html
+  font-family: "Montserrat"
 
 .app
   font-family: "Montserrat"
@@ -66,9 +67,23 @@ div
 
 .font-medium
   font-weight: 600
-  font-size: 24px
+  font-size: 24px !important
   line-height: 29px
+
+.font-big
+  font-weight: 600
+  font-size: 42px
+  line-height: 51px
 
 .all_transitions
   transition: all 0.5s ease-in
+
+.circle
+  border-radius: 50%
+
+.p-relative
+  position: relative
+
+.overflow-hidden
+  overflow: hidden
 </style>

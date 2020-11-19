@@ -5,12 +5,13 @@
     <v-bottom-navigation
       fixed
       grow
-      class="animate__animated animate__fadeInUp"
+      class="d-flex bottom-nav animate__animated animate__fadeInUp"
       color="primary"
       v-model="value"
     >
 
       <v-btn
+        class=""
         v-for="item in items"
         :key="`NavButton-` + item.name"
         :value="item.id"
@@ -39,3 +40,9 @@ export default {
 
 }
 </script>
+
+<style lang="sass">
+.bottom-nav a
+  height: auto !important
+
+</style>

@@ -1,7 +1,7 @@
 <template>
-  <v-btn large depressed class="d-flex flex-row button-shape justify-start">
-    <div class="button-circle primary mr-5" />
-    <div class="button-text">
+  <v-btn large depressed height="44px" class="d-flex p-relative flex-row button-shape justify-start">
+    <div class="button-circle primary mr-2" />
+    <div class="button-text font-medium">
       {{text}}
     </div>
   </v-btn>
@@ -14,6 +14,10 @@ export default {
       type: String,
       default: ''
     },
+    icon: {
+      type: String,
+      default: null
+    }
   },
   components: {
   }
@@ -23,6 +27,7 @@ export default {
 <style lang="sass">
 .button-shape
   border-radius: 16px
+  overflow: hidden
 
 .button-circle
   border-radius: 50%
@@ -31,7 +36,7 @@ export default {
 
 .button-text
   font-weight: 600
-  font-size: 18px
   line-height: 29px
   color: #344356
+
 </style>
