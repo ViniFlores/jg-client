@@ -31,7 +31,8 @@ export default {
     '~/plugins/anime.js',
     '~/plugins/axios.js',
     '~/plugins/toast.js',
-    '~/plugins/persistedState.client.js'
+    '~/plugins/persistedState.client.js',
+    '~/plugins/auth.client.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
