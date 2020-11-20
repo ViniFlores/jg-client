@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex white flex-column full-viewport">
     <div class="d-flex align-center login-splash">
-      <v-img src="3.jpg" alt="Login splash art" />
+      <v-img src="3.jpg" max-height=400 contain alt="Login splash art" />
       <img class="logo" width="72px" src="logo-jg.svg" alt="Logo Jovens Genios" >
       <v-btn class="secondary signup-button" @click="$router.push('/signup')" depressed>Cadastrar</v-btn>
     </div>
@@ -69,7 +69,7 @@ export default {
 
 .signup-button
   position: absolute
-  right: 12px
+  right: 24px
   top: 12px
 
 .logo

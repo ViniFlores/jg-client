@@ -14,7 +14,8 @@ export default {
 
   mutations: {
     setState(state, newState) {
-      state.jwt = newState.jwt
+      if (!!newState.jwt)
+        state.jwt = newState.jwt
       state.id = newState.id
       state.firstname = newState.firstname
       state.lastname = newState.lastname
@@ -45,7 +46,28 @@ export default {
       return new Promise((resolve, reject) => {
         this.$axios.$post(API_URL + 'users/login', credentials, { withCredentials: true }).then(r => {
           commit('setState', r)
+          resolve(r)
+        }).catch(e => {
+          reject(e)
+        })
+      })
+    },
+
+    reauth({ commit }) {
+      return new Promise((resolve, reject) => {
+        this.$axios.$get(API_URL + 'users/reauth', { withCredentials: true }).then(r => {
           console.log(r)
+          commit('setState', r)
+          resolve(r)
+        }).catch(e => {
+          reject(e)
+        })
+      })
+    },
+
+    update({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        this.$axios.$post(API_URL + 'users/update', data, { withCredentials: true }).then(r => {
           resolve(r)
         }).catch(e => {
           reject(e)

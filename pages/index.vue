@@ -6,7 +6,7 @@
     <div v-if="!selectedTopic" class="big-ellipse primary animate__animated animate__fadeIn" />
     <div v-if="!selectedTopic" class="small-ellipse secondary animate__animated animate__fadeIn"/>
 
-    <div v-else-if="actualQuestion < questions.length" class="big-ellipse-bottom secondary animate__animated animate__fadeIn" />
+    <div v-if="selectedTopic && (actualQuestion < questions.length)" class="big-ellipse-bottom secondary animate__animated animate__fadeIn" />
 
   </div>
 </template>
@@ -65,7 +65,6 @@ export default {
 <style lang="sass">
 .big-ellipse
   position: absolute
-  z-index: 0
   width: 186px
   height: 186px
   left: 57px
@@ -75,7 +74,6 @@ export default {
 
 .small-ellipse
   position: absolute
-  z-index: 0
   width: 116px
   height: 116px
   left: 153px

@@ -69,7 +69,7 @@ export default {
   position: absolute
   width: 264px
   height: 272px
-  left: 207px
+  right: -70px
   top: -61px
   background: #5468FF
   overflow-x: hidden
