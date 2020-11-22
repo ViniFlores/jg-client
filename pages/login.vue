@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex white flex-column full-viewport">
+  <div class="d-flex white flex-column full-viewport overflow-hidden">
     <div class="d-flex align-center login-splash">
       <v-img src="3.jpg" max-height=400 contain alt="Login splash art" />
       <img class="logo" width="72px" src="logo-jg.svg" alt="Logo Jovens Genios" >
@@ -18,8 +18,9 @@
           <v-text-field type="text" label="Email" v-model="email" />
           <v-text-field type="password" label="Senha" v-model="password" />
         </div>
+        <a @click="$router.push('/recovery')" class="align-self-end text--caption">Esqueci a senha</a>
         <v-spacer />
-        <v-btn :loading="loading" depressed class="primary" @click="login()">Login</v-btn>
+        <v-btn :loading="loading" depressed class="primary mb-5" @click="login()">Login</v-btn>
       </div>
     </div>
   </div>

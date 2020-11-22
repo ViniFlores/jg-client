@@ -58,6 +58,7 @@ export default {
         this.$axios.$get(API_URL + 'users/reauth', { withCredentials: true }).then(r => {
           console.log(r)
           commit('setState', r)
+          console.log('EITA')
           resolve(r)
         }).catch(e => {
           reject(e)
@@ -75,6 +76,18 @@ export default {
       })
     },
 
+    redefine({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        this.$axios.$post(API_URL + 'users/redefine', data, { withCredentials: true }).then(r => {
+          console.log(r)
+          commit('setState', r)
+          resolve(r)
+        }).catch(e => {
+          reject(e)
+        })
+      })
+    },
+
     fetchExp({ commit }) {
       return new Promise((resolve, reject) => {
         this.$axios.$get(API_URL + 'users/exp', { withCredentials: true }).then(r => {
@@ -82,6 +95,16 @@ export default {
             commit('exp', r[0]['exp'])
           else
             commit('exp', 0)
+          resolve(r)
+        }).catch(e => {
+          reject(e)
+        })
+      })
+    },
+
+    recovery({ commit }, email) {
+      return new Promise((resolve, reject) => {
+        this.$axios.$post(API_URL + 'users/recovery', { email: email }).then(r => {
           resolve(r)
         }).catch(e => {
           reject(e)
