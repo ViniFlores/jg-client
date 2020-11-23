@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { API_URL } from '../variables'
 export default {
   components: {
   },
@@ -82,7 +83,7 @@ export default {
 
       else {
         this.loading = true
-        this.$axios.$post('http://localhost:3030/users/create', this.user).then(() => {
+        this.$axios.$post(API_URL + 'users/create', this.user).then(() => {
           this.$router.push('/login')
           this.$toast.info("Está sendo enviado um email para confirmação da conta")
           this.loading = false
