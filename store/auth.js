@@ -23,7 +23,7 @@ export default {
     },
     exp(state, exp) {
       state.experience = exp
-    }
+    },
   },
 
   getters: {
@@ -56,9 +56,7 @@ export default {
     reauth({ commit }) {
       return new Promise((resolve, reject) => {
         this.$axios.$get(API_URL + 'users/reauth', { withCredentials: true }).then(r => {
-          console.log(r)
           commit('setState', r)
-          console.log('EITA')
           resolve(r)
         }).catch(e => {
           reject(e)
@@ -79,7 +77,6 @@ export default {
     redefine({ commit }, data) {
       return new Promise((resolve, reject) => {
         this.$axios.$post(API_URL + 'users/redefine', data, { withCredentials: true }).then(r => {
-          console.log(r)
           commit('setState', r)
           resolve(r)
         }).catch(e => {

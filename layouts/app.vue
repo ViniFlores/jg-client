@@ -10,6 +10,8 @@
 <script>
 import BottomNav from '~/components/molecules/BottomNav.vue'
 import { mapGetters } from 'vuex'
+import io from 'socket.io-client'
+import { API_URL } from './../variables'
 
 export default {
   components: { 
@@ -18,6 +20,13 @@ export default {
   data () {
     return {
     }
+  },
+  mounted() {
+    this.socket = this.$nuxtSocket({
+    })
+    this.socket.on('newTopic', () => {
+      this.$store.dispatch('class/populateTopics')
+    })
   },
   computed: {
     ...mapGetters({

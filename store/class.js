@@ -62,6 +62,7 @@ export default {
   actions: {
     populateTopics({ commit }) {
       return new Promise((resolve, reject) => {
+        console.log('GET: API_URL/questions')
         this.$axios.$get(API_URL + 'topics', { withCredentials: true }).then(r => {
           commit('setTopics', r)
           resolve(r)
@@ -87,7 +88,6 @@ export default {
     submitTopic({ commit, getters }) {
       return new Promise((resolve, reject) => {
         console.log('POST: API_URL/submissions')
-        console.log
         this.$axios.$post(API_URL + 'submissions/' + getters['selectedTopic'].id, { answers: getters['answers'] }, { withCredentials: true }).then(r => {
           resolve(r)
         }).catch(e => {

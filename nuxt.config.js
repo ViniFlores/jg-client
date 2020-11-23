@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import { API_URL } from './variables'
 
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -48,7 +49,15 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-socket-io'
   ],
+
+  io: {
+    sockets: [{
+      name: 'main',
+      url: API_URL
+    }]
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {

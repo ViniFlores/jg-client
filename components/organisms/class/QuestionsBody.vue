@@ -57,6 +57,9 @@
 
     </div>
 
+    {{questions}}
+    {{experience}}
+    {{maxExp}}
 
     <v-spacer />
 
@@ -69,7 +72,7 @@
             </div>
         </v-progress-circular>
 
-        <div v-if="(experience/selectedTopic.questions.reduce(((acc, v) => acc + v.exp), 0)) == 1" class="perfect-check d-flex align-center justify-center circle secondary animate__animated animate__bounceIn animate__delay-1s">
+        <div v-if="(experience/maxExp) == 1" class="perfect-check d-flex align-center justify-center circle secondary animate__animated animate__bounceIn animate__delay-1s">
           <v-icon size="44px" class="white--text">mdi-check</v-icon>
         </div>
 
@@ -83,8 +86,6 @@
       </div>
       <confetti v-if="endOfTopic" />
     </div>
-
-
 
     <v-spacer />
 
@@ -141,7 +142,13 @@ export default {
     }),
 
     endOfTopic() {
-      return !(this.actualQuestion < this.topics.length)
+      return !(this.actualQuestion < this.questions.length)
+    },
+
+    maxExp() {
+      return this.questions.reduce((acc, question) => {
+        return acc + Math.max.apply(Math, question.answers.map(answer => answer.experience))
+      }, 0)
     }
   },
 
@@ -167,7 +174,6 @@ export default {
         if (this.endOfTopic) {
           this.final = true
           this.$store.dispatch('class/submitTopic').then(r => {
-            console.log(r)
             this.experience = r.experience
             this.$toast.success('Você finalizou o tópico !')
           })

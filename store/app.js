@@ -15,18 +15,4 @@ export default {
     }
   },
 
-  actions: {
-    authenticate: ({ commit }, credentials) => {
-      return new Promise((resolve, reject) => {
-        feathersClient.authenticate({
-          strategy: 'local',
-          ...credentials
-        }).then(r => {
-          commit('setUserData', r)
-          resolve(r)
-        }).catch(e => reject(e))
-      })
-    },
-
-  }
 }
