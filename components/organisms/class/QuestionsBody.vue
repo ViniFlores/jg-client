@@ -57,10 +57,6 @@
 
     </div>
 
-    {{questions}}
-    {{experience}}
-    {{maxExp}}
-
     <v-spacer />
 
     <div v-if="final" class="my-5 mx-5 d-flex flex-column border-radius align-self-stretch align-center">

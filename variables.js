@@ -1,1 +1,1 @@
-export let API_URL = 'http://localhost:3030/'
+export let API_URL = 'https://api.elojobheaven.com.br/'
